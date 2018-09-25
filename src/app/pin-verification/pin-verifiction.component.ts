@@ -18,11 +18,7 @@ export class PinVerifictionComponent implements OnInit, AfterViewInit {
   pinArray: number[] = [];
 
   @Input()
-  set pinCount(count: number) {
-    for (let i = 0; i < count; i++) {
-      this.pinArray.push(i);
-    }
-  }
+  pinCount: number;
 
   @ViewChildren('pin')
   pins: QueryList<ElementRef>;
@@ -30,18 +26,20 @@ export class PinVerifictionComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2) {}
 
   ngOnInit() {
-    console.log('ngOnInit called');
+    for (let i = 0; i < this.pinCount; i++) {
+      this.pinArray.push(i);
+    }
   }
 
   ngAfterViewInit() {
-    console.log(this.pins);
-
-    // this.renderer.selectRootElement(this.pins.first.nativeElement).focus();
-
-    // this.pins.changes.subscribe(data => console.log(data));
+    this.renderer.selectRootElement(this.pins.first.nativeElement).focus();
   }
 
   onKeyUp(event, index) {
-    console.log(event.target, index);
+    const nextIndex = index === this.pinCount - 1 ? 0 : index + 1;
+    const nextPin = this.pins.find((item, i) => i === nextIndex);
+    if (nextPin) {
+      this.renderer.selectRootElement(nextPin.nativeElement).focus();
+    }
   }
 }
