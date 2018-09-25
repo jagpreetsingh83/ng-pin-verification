@@ -1,0 +1,3 @@
+<div class="pin">
+  <input #pin *ngFor="let pin of pinArray;let i=index" size="1" maxlength="1" (keyup)="onKeyUp($event, i)">
+</div>
