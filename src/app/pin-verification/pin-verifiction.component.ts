@@ -35,9 +35,29 @@ export class PinVerifictionComponent implements OnInit, AfterViewInit {
     this.renderer.selectRootElement(this.pins.first.nativeElement).focus();
   }
 
-  onKeyUp(event, index) {
-    const nextIndex = index === this.pinCount - 1 ? 0 : index + 1;
-    const nextPin = this.pins.find((item, i) => i === nextIndex);
+  onKeyDown(event: KeyboardEvent, index: number) {
+    console.log(event);
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    let targetIndex = index;
+    const inputField = event.target as HTMLInputElement;
+
+    if (event.code.indexOf('Digit') > -1) {
+      // Number
+      inputField.value = event.key;
+      // Move Forward
+      targetIndex++;
+    } else if (event.key === 'Backspace') {
+      if (!inputField.value) {
+        // Move Backward
+        targetIndex--;
+      } else {
+        inputField.value = '';
+      }
+    }
+    const nextPin = this.pins.find((item, i) => i === targetIndex);
     if (nextPin) {
       this.renderer.selectRootElement(nextPin.nativeElement).focus();
     }
