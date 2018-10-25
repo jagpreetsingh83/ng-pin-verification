@@ -6,6 +6,10 @@ This component allows the user to input the verification code (any number of dig
 
 ![Pin Verification Screen](screenshot.png 'Pin Verification')
 
+```javascript
+<app-pin-verifiction [pinCount]="6"></app-pin-verifiction>
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server
