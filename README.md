@@ -1,5 +1,11 @@
 # NgPinVerification
 
+## Details
+
+This component allows the user to input the verification code (any number of digits). The cursor will assist the user by moving to next and previous fields automatically.
+
+![Pin Verification Screen](screenshot.png 'Pin Verification')
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server
